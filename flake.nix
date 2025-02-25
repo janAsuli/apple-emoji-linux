@@ -12,7 +12,7 @@
       pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
     in
     {
-      packages = forAllSystems (system: with nixpkgs.legacyPackages.${system}; {
+      packages = forAllSystems (system: with (import nixpkgs { inherit system; config.allowUnfree = true; }); {
         default = stdenvNoCC.mkDerivation rec {
           pname = "apple-emoji-linux";
           version = "17.4";
